@@ -1,0 +1,53 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { slugifyStr } from "@/utils/slugify";
+import { getPath } from "@/utils/getPath";
+import { getReadingTime } from "@/utils/getReadingTime";
+import Datetime from "./Datetime.astro";
+
+type Props = {
+  variant?: "h2" | "h3";
+} & CollectionEntry<"blog">;
+
+const { variant: Heading = "h2", id, data, filePath, body } = Astro.props;
+
+const { title, description, ...props } = data;
+
+// Calculate reading time from post body
+const readingTime = body ? getReadingTime(body).minutes : undefined;
+---
+
+<li class="my-6">
+  <div class="flex flex-row gap-4">
+    {/* Thumbnail Image */}
+    {data.heroImage && (
+      <a href={getPath(id, filePath)} class="hidden sm:block flex-shrink-0 group">
+        <img 
+          src={data.heroImage} 
+          alt={title}
+          class="w-36 h-24 object-cover rounded shadow-sm transition-all duration-200 group-hover:shadow-md group-hover:scale-[1.02] border border-border"
+          loading="lazy"
+        />
+      </a>
+    )}
+    
+    <div class="flex-1">
+      <a
+        href={getPath(id, filePath)}
+        class:list={[
+          "inline-block text-lg font-medium text-accent",
+          "decoration-dashed underline-offset-4 hover:underline",
+          "focus-visible:no-underline focus-visible:underline-offset-0",
+        ]}
+      >
+        <Heading
+          style={{ viewTransitionName: slugifyStr(title.replaceAll(".", "-")) }}
+        >
+          {title}
+        </Heading>
+      </a>
+      <Datetime {...props} readingTime={readingTime} />
+      <p>{description}</p>
+    </div>
+  </div>
+</li>

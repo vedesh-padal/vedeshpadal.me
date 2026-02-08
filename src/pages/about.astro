@@ -1,0 +1,166 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import { SITE } from "@/config";
+import { Icon } from "astro-icon/components";
+---
+
+<Layout title={`About | ${SITE.title}`}>
+  <Header />
+  <main id="main-content" class="app-layout">
+    <!-- Breadcrumb -->
+    <nav class="pt-6 text-sm text-foreground/60">
+      <a href="/" class="hover:text-accent">Home</a> » About
+    </nav>
+
+    <h1 class="text-3xl font-bold sm:text-4xl mt-4 mb-8">About</h1>
+
+    <!-- Hero: Photo + Bio -->
+    <section class="flex flex-col sm:flex-row sm:items-center gap-6 sm:gap-8 mb-10">
+      <!-- Photo - centered on mobile, left on desktop -->
+      <div class="flex justify-center sm:justify-start flex-shrink-0">
+        <img 
+          src="/images/vedesh-pose.jpeg" 
+          alt="Vedesh Padal"
+          class="w-36 h-36 sm:w-44 sm:h-44 rounded-full object-cover border-2 border-accent/30"
+        />
+      </div>
+
+      <!-- Bio Paragraphs - left aligned always -->
+      <div class="space-y-3 text-foreground/90 leading-relaxed">
+        <p>
+          Backend-leaning software engineer based in India. I enjoy understanding how things work under the hood—systems, infrastructure, and the tools I use daily.
+        </p>
+        <p>
+          I learn best by building from first principles, step by step, rather than just following tutorials.
+        </p>
+        <p>
+          Currently focused on backend development and system design at <a href="https://candescent.com/" target="_blank" rel="noopener" class="text-accent hover:underline">Candescent</a> (fintech).
+        </p>
+        <p>
+          <a href="/projects" class="text-accent hover:underline">Check out my projects</a> or browse <a href={SITE.profile} target="_blank" rel="noopener" class="text-accent hover:underline">my GitHub</a>.
+        </p>
+      </div>
+    </section>
+
+    <!-- What I'm Working With - With Lucide Icons -->
+    <section class="mb-10">
+      <h2 class="text-xl font-semibold mb-4">What I'm Working With</h2>
+      <div class="grid gap-3 sm:grid-cols-2">
+        <!-- Languages -->
+        <div class="flex items-start gap-3 p-3 rounded-lg border border-border/50 bg-muted/5">
+          <Icon name="lucide:code-2" class="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
+          <div>
+            <span class="text-sm font-medium text-foreground/60">Languages</span>
+            <p class="text-foreground/80">Java, Go, TypeScript, JavaScript</p>
+          </div>
+        </div>
+
+        <!-- Backend -->
+        <div class="flex items-start gap-3 p-3 rounded-lg border border-border/50 bg-muted/5">
+          <Icon name="lucide:server" class="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
+          <div>
+            <span class="text-sm font-medium text-foreground/60">Backend</span>
+            <p class="text-foreground/80">Spring Boot, Node.js, Express.js</p>
+          </div>
+        </div>
+
+        <!-- Databases -->
+        <div class="flex items-start gap-3 p-3 rounded-lg border border-border/50 bg-muted/5">
+          <Icon name="lucide:database" class="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
+          <div>
+            <span class="text-sm font-medium text-foreground/60">Databases</span>
+            <p class="text-foreground/80">PostgreSQL, MySQL, MongoDB</p>
+          </div>
+        </div>
+
+        <!-- Infrastructure -->
+        <div class="flex items-start gap-3 p-3 rounded-lg border border-border/50 bg-muted/5">
+          <Icon name="lucide:container" class="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
+          <div>
+            <span class="text-sm font-medium text-foreground/60">Infrastructure</span>
+            <p class="text-foreground/80">Docker, Linux, Git, CLI-first</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GitHub Activity -->
+    <section class="mb-10">
+      <h2 class="flex items-center gap-2 text-xl font-semibold mb-4">
+        <Icon name="lucide:github" class="w-5 h-5" />
+        GitHub Activity
+      </h2>
+      <p class="text-foreground/80 mb-4">
+        I build what interests me and share it on <a href={SITE.profile} target="_blank" rel="noopener" class="text-accent hover:underline">GitHub</a>.
+      </p>
+      <div class="overflow-x-auto">
+        <img 
+          src={`https://ghchart.rshah.org/ff6b01/vedesh-padal`}
+          alt="GitHub Contribution Graph"
+          class="max-w-full h-auto"
+        />
+      </div>
+    </section>
+
+    <!-- Current Focus -->
+    <section class="mb-10">
+      <h2 class="flex items-center gap-2 text-xl font-semibold mb-3">
+        <Icon name="lucide:target" class="w-5 h-5" />
+        Current Focus
+      </h2>
+      <ul class="space-y-2 text-foreground/80">
+        <li class="flex items-center gap-2">
+          <Icon name="lucide:arrow-right" class="w-4 h-4 text-accent" />
+          Backend development & system design
+        </li>
+        <li class="flex items-center gap-2">
+          <Icon name="lucide:arrow-right" class="w-4 h-4 text-accent" />
+          Building practical projects beyond basic CRUD
+        </li>
+        <li class="flex items-center gap-2">
+          <Icon name="lucide:arrow-right" class="w-4 h-4 text-accent" />
+          Container orchestration & cloud infrastructure
+        </li>
+        <li class="flex items-center gap-2">
+          <Icon name="lucide:arrow-right" class="w-4 h-4 text-accent" />
+          Distributed systems architecture
+        </li>
+      </ul>
+    </section>
+
+    <!-- Outside of Code -->
+    <section class="mb-10">
+      <h2 class="flex items-center gap-2 text-xl font-semibold mb-3">
+        <Icon name="lucide:coffee" class="w-5 h-5" />
+        Outside of Code
+      </h2>
+      <p class="text-foreground/80">
+        When I'm not hacking on code or fiddling with my Linux setup, I like playing badminton, solving chess problems, or hanging on Twitter/X catching cool tech threads.
+      </p>
+    </section>
+
+    <!-- Connect -->
+    
+    <section class="pb-12 border-t border-border pt-6">
+      <div class="text-foreground/70">
+        <span class="block sm:inline">Feel free to connect:</span>
+        <div class="flex items-center gap-2 flex-wrap mt-2 sm:mt-0 sm:inline-flex sm:ml-2">
+          <a href={SITE.profile} target="_blank" rel="noopener" class="inline-flex items-center gap-1 text-accent hover:underline">
+            <Icon name="lucide:github" class="w-4 h-4" /> GitHub
+          </a>
+          <span class="text-foreground/40">·</span>
+          <a href="https://linkedin.com/in/vedesh-padal" target="_blank" rel="noopener" class="inline-flex items-center gap-1 text-accent hover:underline">
+            <Icon name="lucide:linkedin" class="w-4 h-4" /> LinkedIn
+          </a>
+          <span class="text-foreground/40">·</span>
+          <a href="https://x.com/vedesh_padal" target="_blank" rel="noopener" class="inline-flex items-center gap-1 text-accent hover:underline">
+            <Icon name="lucide:twitter" class="w-4 h-4" /> X
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>

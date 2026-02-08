@@ -1,0 +1,154 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import { SITE } from "@/config";
+
+// Helper to build GitHub URL from repo name using SITE.profile
+const getGitHubUrl = (repoName: string) => `${SITE.profile}/${repoName}`;
+
+interface Project {
+  title: string;
+  description: string;
+  tech: string[];
+  repo?: string; // Just the repo name, will be combined with SITE.profile
+  liveUrl?: string; // Optional live/demo URL
+  image?: string; // Optional project image path
+  status: "completed" | "in-progress" | "archived";
+  showStatus?: boolean; // Whether to show status badge (default: false)
+}
+
+const projects: Project[] = [
+  {
+    title: "Memento Mori",
+    description:
+      "A <strong>GNOME Shell extension</strong> that displays how much of your day, month, year, and life has passed in the top panel. Inspired by <strong>stoic philosophy</strong>. A gentle reminder to make the most of your time.",
+    tech: ["GJS", "GNOME Shell", "JavaScript"],
+    repo: "memento-mori-gnome-extension",
+    liveUrl: "https://extensions.gnome.org/extension/9136/memento-mori/",
+    image: "/images/projects/memento-mori.png",
+    status: "completed",
+  },
+  {
+    title: "CertiChain",
+    description:
+      "A <strong>blockchain-based</strong> academic certificate management system enabling secure issuance, storage, and <strong>tamper-proof verification</strong> of certificates.<br/>Built to prevent certificate forgery through immutable blockchain records. <span style='white-space:nowrap'><em>— Academic Major Project</em></span>",
+    tech: ["Solidity", "React", "Ethers.js"],
+    repo: "certichain",
+    image: "/images/projects/certichain.png",
+    status: "completed",
+  },
+  {
+    title: "Chat API",
+    description:
+      "<strong>Real-time messaging backend</strong> built with Socket.io. Supports private messaging, group chats, and message persistence with MongoDB. Includes extensive <strong>Swagger OpenAPI</strong> documentation. <span style='white-space:nowrap'><em>— Internship Project</em></span>",
+    tech: ["Node.js", "Socket.io", "MongoDB", "Express"],
+    repo: "tal-chat-app",
+    status: "completed",
+  },
+  {
+    title: "ListenPDF",
+    description:
+      "A mobile app designed for <strong>visually impaired students</strong>, providing text-to-speech for PDFs in <strong>English, Telugu, and Hindi</strong>.",
+    tech: ["React Native", "Google Cloud Document AI", "Google Cloud APIs"],
+    repo: "ListenPDF",
+    image: "/images/projects/listenpdf.png",
+    status: "completed",
+  },
+];
+
+const statusColors = {
+  completed: "bg-green-500/20 text-green-400",
+  "in-progress": "bg-yellow-500/20 text-yellow-400",
+  archived: "bg-gray-500/20 text-gray-400",
+};
+---
+
+<Layout title={`Projects | ${SITE.title}`}>
+  <Header />
+  <main id="main-content" class="app-layout">
+    <section class="pt-8 pb-6">
+      <h1 class="text-3xl font-bold sm:text-4xl">Projects</h1>
+      <p class="mt-2 text-foreground/80">
+        Things I've built to learn and solve problems.
+      </p>
+    </section>
+
+    <section class="pb-12">
+      <ul class="grid gap-6">
+        {
+          projects.map(project => (
+            <li class="rounded-lg border border-border p-6 transition-all duration-300 hover:bg-muted/30 hover:shadow-lg hover:shadow-accent/5">
+              <div class="flex gap-4">
+                {/* Main content */}
+                <div class="flex-1">
+                  <div class="flex flex-wrap items-center gap-3">
+                    <h2 class="text-xl font-semibold">{project.title}</h2>
+                    {/* Inline links with icons */}
+                    <div class="flex items-center gap-2 text-sm">
+                      {project.repo && (
+                        <a
+                          href={getGitHubUrl(project.repo)}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          class="text-foreground/60 hover:text-accent transition-colors"
+                          title="View on GitHub"
+                        >
+                          GitHub ↗
+                        </a>
+                      )}
+                      {project.liveUrl && (
+                        <a
+                          href={project.liveUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          class="text-foreground/60 hover:text-accent transition-colors"
+                          title="View live demo"
+                        >
+                          Live ↗
+                        </a>
+                      )}
+                    </div>
+                    {project.showStatus && (
+                      <span
+                        class={`rounded-full px-2 py-0.5 text-xs ${statusColors[project.status]}`}
+                      >
+                        {project.status}
+                      </span>
+                    )}
+                  </div>
+                  <p class="mt-2 text-foreground/80 max-w-xl" set:html={project.description}></p>
+                  <div class="mt-4 flex flex-wrap gap-2">
+                    {project.tech.map(t => (
+                      <span class="rounded bg-muted px-2 py-1 text-xs">{t}</span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Optional project image */}
+                {project.image && (
+                  <div class="hidden sm:block w-32 h-24 flex-shrink-0">
+                    <a
+                      href={project.image}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="block"
+                      title="Click to view full image"
+                    >
+                      <img
+                        src={project.image}
+                        alt={`${project.title} preview`}
+                        class="w-full h-full object-cover rounded border border-border hover:opacity-80 transition-opacity cursor-zoom-in"
+                      />
+                    </a>
+                  </div>
+                )}
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+  </main>
+  <Footer />
+</Layout>

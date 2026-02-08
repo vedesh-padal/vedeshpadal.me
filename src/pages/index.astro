@@ -1,0 +1,141 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import Socials from "@/components/Socials.astro";
+import LinkButton from "@/components/LinkButton.astro";
+import Card from "@/components/Card.astro";
+import getSortedPosts from "@/utils/getSortedPosts";
+import IconRss from "@/assets/icons/IconRss.svg";
+import IconArrowRight from "@/assets/icons/IconArrowRight.svg";
+import { SITE } from "@/config";
+import { SOCIALS } from "@/constants";
+
+const posts = await getCollection("blog");
+
+const sortedPosts = getSortedPosts(posts);
+const featuredPosts = sortedPosts.filter(({ data }) => data.featured);
+const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
+---
+
+<Layout>
+  <Header />
+  <main id="main-content" data-layout="index" class="app-layout">
+    <section id="hero" class:list={["pt-8 pb-6", "border-b border-border"]}>
+      <!-- Mobile: centered photo, Desktop: side-by-side -->
+      <div class="flex flex-col sm:flex-row sm:items-center sm:gap-8">
+        <!-- Profile Photo - centered on mobile -->
+        <div class="flex justify-center sm:justify-start mb-6 sm:mb-0 flex-shrink-0">
+          <img 
+            src="/images/vedesh-pose.jpeg"
+            alt="Vedesh Padal"
+            class="w-36 h-36 sm:w-40 sm:h-40 rounded-full object-cover border-2 border-accent/30"
+          />
+        </div>
+
+        <!-- Bio Content - left aligned on all screens -->
+        <div class="flex-1">
+          <h1 class="my-2 text-3xl font-bold sm:my-2 sm:text-4xl">
+            Hey, I'm <span class="gradient-text">Vedesh.</span>
+            <a
+              target="_blank"
+              href="/rss.xml"
+              class="inline-block ml-2 align-middle"
+              aria-label="rss feed"
+              title="RSS Feed"
+            >
+              <IconRss
+                width={20}
+                height={20}
+                class="scale-110 stroke-accent stroke-3 rtl:-rotate-90"
+              />
+              <span class="sr-only">RSS Feed</span>
+            </a>
+          </h1>
+
+          <p class="text-foreground/80">
+            Backend-leaning software engineer who enjoys understanding how systems
+            work under the hood. I like building things from first principles,
+            exploring infrastructure step by step, and turning curiosity into
+            practical projects.
+          </p>
+          <p class="mt-2 text-foreground/80">
+            Currently focused on backend systems, system design, and cloud — always
+            learning by building.
+          </p>
+          {
+            // only display if at least one social link is enabled
+            SOCIALS.length > 0 && (
+              <div class="mt-4 flex flex-col sm:flex-row sm:items-center gap-2">
+                <div class="whitespace-nowrap">Social Links:</div>
+                <Socials />
+              </div>
+            )
+          }
+        </div>
+      </div>
+    </section>
+
+    {
+      featuredPosts.length > 0 && (
+        <section
+          id="featured"
+          class:list={[
+            "pt-12 pb-6",
+            { "border-b border-border": recentPosts.length > 0 },
+          ]}
+        >
+          <h2 class="text-2xl font-semibold tracking-wide">Featured</h2>
+          <ul>
+            {featuredPosts.map(data => (
+              <Card variant="h3" {...data} />
+            ))}
+          </ul>
+        </section>
+      )
+    }
+
+    {
+      recentPosts.length > 0 && (
+        <section id="recent-posts" class="pt-12 pb-6">
+          <h2 class="text-2xl font-semibold tracking-wide">Recent Posts</h2>
+          <ul>
+            {recentPosts.map(
+              (data, index) =>
+                index < SITE.postPerIndex && <Card variant="h3" {...data} />
+            )}
+          </ul>
+        </section>
+      )
+    }
+
+    {
+      sortedPosts.length > 0 ? (
+        <div class="my-8 text-center">
+          <LinkButton href="/posts/">
+            All Posts
+            <IconArrowRight class="inline-block rtl:-rotate-180" />
+          </LinkButton>
+        </div>
+      ) : (
+        <section class="pt-12 pb-6 text-center">
+          <p class="text-foreground/60">
+            Blog posts coming soon. Check back later!
+          </p>
+        </section>
+      )
+    }
+  </main>
+  <Footer />
+</Layout>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const indexLayout = (document.querySelector("#main-content") as HTMLElement)
+      ?.dataset?.layout;
+    if (indexLayout) {
+      sessionStorage.setItem("backUrl", "/");
+    }
+  });
+</script>
