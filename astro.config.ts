@@ -13,12 +13,10 @@ import {
 import { transformerFileName } from "./src/utils/transformers/fileName";
 import { SITE } from "./src/config";
 
-const isGH = process.env.GITHUB_ACTIONS === "true";
-
 // https://astro.build/config
 export default defineConfig({
-  site: isGH ? "https://vedesh-padal.github.io" : SITE.website,
-  base: process.env.BASE_PATH || "/",
+  site: SITE.website,
+  base: "/",
   integrations: [
     sitemap({
       filter: page => SITE.showArchives || !page.endsWith("/archives"),
