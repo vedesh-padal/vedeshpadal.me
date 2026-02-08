@@ -27,7 +27,11 @@ const readingTime = body ? getReadingTime(body).minutes : undefined;
           class="group hidden flex-shrink-0 sm:block"
         >
           <img
-            src={data.heroImage}
+            src={
+              data.heroImage?.startsWith("/")
+                ? import.meta.env.BASE_URL + data.heroImage.replace(/^\//, "")
+                : data.heroImage
+            }
             alt={title}
             class="h-24 w-36 rounded border border-border object-cover shadow-sm transition-all duration-200 group-hover:scale-[1.02] group-hover:shadow-md"
             loading="lazy"

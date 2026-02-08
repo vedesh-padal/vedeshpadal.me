@@ -30,7 +30,7 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
           class="mb-6 flex flex-shrink-0 justify-center sm:mb-0 sm:justify-start"
         >
           <img
-            src="/images/vedesh-pose.jpeg"
+            src={`${import.meta.env.BASE_URL}images/vedesh-pose.jpeg`}
             alt="Vedesh Padal"
             class="h-36 w-36 rounded-full border-2 border-accent/30 object-cover sm:h-40 sm:w-40"
           />
@@ -42,7 +42,7 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
             Hey, I'm <span class="gradient-text">Vedesh.</span>
             <a
               target="_blank"
-              href="/rss.xml"
+              href={`${import.meta.env.BASE_URL}rss.xml`}
               class="ml-2 inline-block align-middle"
               aria-label="rss feed"
               title="RSS Feed"
@@ -115,7 +115,7 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
     {
       sortedPosts.length > 0 ? (
         <div class="my-8 text-center">
-          <LinkButton href="/posts/">
+          <LinkButton href={`${import.meta.env.BASE_URL}posts/`}>
             All Posts
             <IconArrowRight class="inline-block rtl:-rotate-180" />
           </LinkButton>
@@ -137,7 +137,7 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
     const indexLayout = (document.querySelector("#main-content") as HTMLElement)
       ?.dataset?.layout;
     if (indexLayout) {
-      sessionStorage.setItem("backUrl", "/");
+      sessionStorage.setItem("backUrl", import.meta.env.BASE_URL);
     }
   });
 </script>
