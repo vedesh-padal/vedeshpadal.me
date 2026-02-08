@@ -20,17 +20,22 @@ const readingTime = body ? getReadingTime(body).minutes : undefined;
 <li class="my-6">
   <div class="flex flex-row gap-4">
     {/* Thumbnail Image */}
-    {data.heroImage && (
-      <a href={getPath(id, filePath)} class="hidden sm:block flex-shrink-0 group">
-        <img 
-          src={data.heroImage} 
-          alt={title}
-          class="w-36 h-24 object-cover rounded shadow-sm transition-all duration-200 group-hover:shadow-md group-hover:scale-[1.02] border border-border"
-          loading="lazy"
-        />
-      </a>
-    )}
-    
+    {
+      data.heroImage && (
+        <a
+          href={getPath(id, filePath)}
+          class="group hidden flex-shrink-0 sm:block"
+        >
+          <img
+            src={data.heroImage}
+            alt={title}
+            class="h-24 w-36 rounded border border-border object-cover shadow-sm transition-all duration-200 group-hover:scale-[1.02] group-hover:shadow-md"
+            loading="lazy"
+          />
+        </a>
+      )
+    }
+
     <div class="flex-1">
       <a
         href={getPath(id, filePath)}

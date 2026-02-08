@@ -3,7 +3,11 @@
   "type": "module",
   "version": "1.0.0",
   "description": "Vedesh Padal personal portfolio site built with Astro",
-  "keywords": ["astro", "portfolio", "personal-website"],
+  "keywords": [
+    "astro",
+    "portfolio",
+    "personal-website"
+  ],
   "author": "Vedesh Padal",
   "license": "MIT",
   "homepage": "https://vedeshpadal.me",

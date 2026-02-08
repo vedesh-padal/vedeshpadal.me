@@ -26,11 +26,13 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
       <!-- Mobile: centered photo, Desktop: side-by-side -->
       <div class="flex flex-col sm:flex-row sm:items-center sm:gap-8">
         <!-- Profile Photo - centered on mobile -->
-        <div class="flex justify-center sm:justify-start mb-6 sm:mb-0 flex-shrink-0">
-          <img 
+        <div
+          class="mb-6 flex flex-shrink-0 justify-center sm:mb-0 sm:justify-start"
+        >
+          <img
             src="/images/vedesh-pose.jpeg"
             alt="Vedesh Padal"
-            class="w-36 h-36 sm:w-40 sm:h-40 rounded-full object-cover border-2 border-accent/30"
+            class="h-36 w-36 rounded-full border-2 border-accent/30 object-cover sm:h-40 sm:w-40"
           />
         </div>
 
@@ -41,7 +43,7 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
             <a
               target="_blank"
               href="/rss.xml"
-              class="inline-block ml-2 align-middle"
+              class="ml-2 inline-block align-middle"
               aria-label="rss feed"
               title="RSS Feed"
             >
@@ -55,19 +57,19 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
           </h1>
 
           <p class="text-foreground/80">
-            Backend-leaning software engineer who enjoys understanding how systems
-            work under the hood. I like building things from first principles,
-            exploring infrastructure step by step, and turning curiosity into
-            practical projects.
+            Backend-leaning software engineer who enjoys understanding how
+            systems work under the hood. I like building things from first
+            principles, exploring infrastructure step by step, and turning
+            curiosity into practical projects.
           </p>
           <p class="mt-2 text-foreground/80">
-            Currently focused on backend systems, system design, and cloud — always
-            learning by building.
+            Currently focused on backend systems, system design, and cloud —
+            always learning by building.
           </p>
           {
             // only display if at least one social link is enabled
             SOCIALS.length > 0 && (
-              <div class="mt-4 flex flex-col sm:flex-row sm:items-center gap-2">
+              <div class="mt-4 flex flex-col gap-2 sm:flex-row sm:items-center">
                 <div class="whitespace-nowrap">Social Links:</div>
                 <Socials />
               </div>

@@ -91,7 +91,7 @@ const statusColors = {
                           href={getGitHubUrl(project.repo)}
                           target="_blank"
                           rel="noopener noreferrer"
-                          class="text-foreground/60 hover:text-accent transition-colors"
+                          class="text-foreground/60 transition-colors hover:text-accent"
                           title="View on GitHub"
                         >
                           GitHub ↗
@@ -102,7 +102,7 @@ const statusColors = {
                           href={project.liveUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          class="text-foreground/60 hover:text-accent transition-colors"
+                          class="text-foreground/60 transition-colors hover:text-accent"
                           title="View live demo"
                         >
                           Live ↗
@@ -117,17 +117,22 @@ const statusColors = {
                       </span>
                     )}
                   </div>
-                  <p class="mt-2 text-foreground/80 max-w-xl" set:html={project.description}></p>
+                  <p
+                    class="mt-2 max-w-xl text-foreground/80"
+                    set:html={project.description}
+                  />
                   <div class="mt-4 flex flex-wrap gap-2">
                     {project.tech.map(t => (
-                      <span class="rounded bg-muted px-2 py-1 text-xs">{t}</span>
+                      <span class="rounded bg-muted px-2 py-1 text-xs">
+                        {t}
+                      </span>
                     ))}
                   </div>
                 </div>
 
                 {/* Optional project image */}
                 {project.image && (
-                  <div class="hidden sm:block w-32 h-24 flex-shrink-0">
+                  <div class="hidden h-24 w-32 flex-shrink-0 sm:block">
                     <a
                       href={project.image}
                       target="_blank"
@@ -138,7 +143,7 @@ const statusColors = {
                       <img
                         src={project.image}
                         alt={`${project.title} preview`}
-                        class="w-full h-full object-cover rounded border border-border hover:opacity-80 transition-opacity cursor-zoom-in"
+                        class="h-full w-full cursor-zoom-in rounded border border-border object-cover transition-opacity hover:opacity-80"
                       />
                     </a>
                   </div>
