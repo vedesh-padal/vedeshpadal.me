@@ -20,6 +20,8 @@ jobs:
         uses: withastro/action@v3
         with:
           package-manager: npm
+        env:
+          BASE_PATH: /vedeshpadal.me/
 
   deploy:
     needs: build

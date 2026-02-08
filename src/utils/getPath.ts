@@ -33,11 +33,12 @@ export function getPath(
   }
 
   // Determine the base path based on configuration but ensuring we use the Astro BASE_URL
-  const siteBase = import.meta.env.BASE_URL === "/" ? "" : import.meta.env.BASE_URL;
+  const siteBase =
+    import.meta.env.BASE_URL === "/" ? "" : import.meta.env.BASE_URL;
   // Ensure we don't double slash if BASE_URL ends with / and path starts with /
   const cleanBase = siteBase.endsWith("/") ? siteBase.slice(0, -1) : siteBase;
 
   const finalPath = [basePath, ...pathSegments, slug].join("/");
-  
+
   return `${cleanBase}${finalPath}`;
 }

@@ -18,7 +18,7 @@ const isGH = process.env.GITHUB_ACTIONS === "true";
 // https://astro.build/config
 export default defineConfig({
   site: isGH ? "https://vedesh-padal.github.io" : SITE.website,
-  base: isGH ? "/vedeshpadal.me" : "/",
+  base: process.env.BASE_PATH || "/",
   integrations: [
     sitemap({
       filter: page => SITE.showArchives || !page.endsWith("/archives"),
