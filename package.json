@@ -2,6 +2,18 @@
   "name": "vedeshpadal.me",
   "type": "module",
   "version": "1.0.0",
+  "description": "Vedesh Padal personal portfolio site built with Astro",
+  "keywords": ["astro", "portfolio", "personal-website"],
+  "author": "Vedesh Padal",
+  "license": "MIT",
+  "homepage": "https://vedeshpadal.me",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vedesh-padal/vedeshpadal.me.git"
+  },
+  "bugs": {
+    "url": "https://github.com/vedesh-padal/vedeshpadal.me/issues"
+  },
   "scripts": {
     "dev": "astro dev",
     "build": "astro check && astro build && pagefind --site dist && cp -r dist/pagefind public/",
