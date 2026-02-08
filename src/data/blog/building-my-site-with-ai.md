@@ -13,6 +13,8 @@ heroImage: /assets/img/2026/building-my-site-with-ai/1.png
 description: "How I'm building and refining my personal website using Claude Opus 4.5 and the Antigravity AI coding assistant—from initial scaffolding to polishing every detail."
 ---
 
+## Table of contents
+
 ## Why Build a Personal Site?
 
 Every developer needs a place to call their own on the internet. A personal site isn't just a portfolio, it's a reflection of how you think, what you care about, and how you approach problems.
