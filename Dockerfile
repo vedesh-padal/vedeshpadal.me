@@ -1,17 +1,15 @@
-# Base stage for building the static files
-FROM node:lts AS base
+# Stage 1: Build the site
+FROM node:lts-alpine AS build
 WORKDIR /app
 
-# Install pnpm
-RUN corepack enable && corepack prepare pnpm@latest --activate
-
-COPY package.json pnpm-lock.yaml ./
-RUN pnpm install --frozen-lockfile
+COPY package.json package-lock.json ./
+RUN npm ci
 
 COPY . .
-RUN pnpm run build
+RUN npm run build
 
-# Runtime stage for serving the application
-FROM nginx:mainline-alpine-slim AS runtime
-COPY --from=base /app/dist /usr/share/nginx/html
+# Stage 2: Serve with Nginx
+FROM nginx:alpine AS runtime
+COPY --from=build /app/dist /usr/share/nginx/html
 EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
